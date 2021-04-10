@@ -1,0 +1,49 @@
+[System]
+Name='tank_trail2'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=7
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='prod'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='level'
+Range=[-1 1]
+NumMFs=5
+MF1='Very_high':'zmf',[-0.952 -0.64]
+MF2='High':'trapmf',[-0.648 -0.52 -0.2 -0.04]
+MF3='Medium':'trapmf',[-0.1201 -0.04651 0.2971 0.3695]
+MF4='low':'trapmf',[0.328 0.344 0.5898 0.616]
+MF5='very_low':'pimf',[0.576 0.96 1.12 1.76]
+
+[Input2]
+Name='rate'
+Range=[-1 1]
+NumMFs=3
+MF1='negative':'zmf',[-0.2 -0.01]
+MF2='zero':'trimf',[-0.7486 0.09029 0.5971]
+MF3='positive':'smf',[0.2511 1.323]
+
+[Output1]
+Name='valve'
+Range=[0 1]
+NumMFs=5
+MF1='sudden_close':'zmf',[0 0.1]
+MF2='open_fast':'trapmf',[0.7474 0.779 0.968 1.05]
+MF3='open_medium':'trapmf',[0.3 0.375 0.6997 0.8]
+MF4='open_slow':'trapmf',[0.07011 0.161 0.396 0.459]
+MF5='sudden_open':'smf',[0.95 0.96]
+
+[Rules]
+5 0, 1 (1) : 1
+1 0, 5 (1) : 1
+2 0, 2 (1) : 1
+4 1, 1 (1) : 1
+4 2, 2 (1) : 1
+4 3, 3 (1) : 1
+3 0, 2 (1) : 1
